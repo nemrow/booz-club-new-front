@@ -1,2 +1,8 @@
 {{input value=boozType}}
 <button {{action 'beginSearch'}}>Search</button>
+
+{{#if locationFound}}
+  <p>location found</p>
+{{else}}
+  <p>location not found</p>
+{{/if}}
