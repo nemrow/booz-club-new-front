@@ -6,3 +6,7 @@
 {{else}}
   <p>location not found</p>
 {{/if}}
+
+{{#if locationFound}}
+  {{google-map lat=latitude lng=longitude}}
+{{/if}}

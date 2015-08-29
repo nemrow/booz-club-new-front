@@ -1,1 +1,7 @@
 {{model.boozType}}
+
+{{#each completedSearches as |search|}}
+  <p>{{search.name}}</p>
+  <small>{{search.status}}</small>
+  <small>{{search.response}}</small>
+{{/each}}
