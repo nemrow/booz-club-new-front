@@ -10,6 +10,7 @@ MainController = Ember.Controller.extend
   map: null
   placesService: null
   search: null
+  handlerApi: "https://booz-club-new-back-production.herokuapp.com/search"
 
   getPlacesService: (context) ->
     unless context.get('placesService')
@@ -51,7 +52,7 @@ MainController = Ember.Controller.extend
 
   placesSearchComplete: ->
     $.ajax
-      url: "http://localhost:3000/search"
+      url: @get('handlerApi')
       data: {searchId: @get('search').id}
       method: "post"
       success: (result) =>
@@ -87,7 +88,8 @@ MainController = Ember.Controller.extend
     console.log @get('placesCount')
     if @get('currentRadius') > 4828 && @get('placesCount') < 5
       # Not enough places
-    else if @get('placesCount') < 12
+    # else if @get('placesCount') < 12
+    else if @get('placesCount') < 2
       # found X places, looking for more
       setTimeout =>
         @set 'currentRadius', @get('currentRadius') + 200

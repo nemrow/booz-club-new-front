@@ -1,5 +1,4 @@
 /* jshint node: true */
-
 module.exports = function(environment) {
   var ENV = {
     googleMap: {
@@ -10,7 +9,7 @@ module.exports = function(environment) {
     environment: environment,
     contentSecurityPolicy: {
       'connect-src': "'self' https://auth.firebase.com wss://*.firebaseio.com",
-      'connect-src': "'self' http://localhost:3000 wss://*.localhost:3000",
+      'connect-src': "'self' http://localhost:3000 wss://*.localhost:3000 https://booz-club-new-back-production.herokuapp.com",
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-eval' *.googleapis.com maps.gstatic.com",
       'font-src': "'self' fonts.gstatic.com",
