@@ -83,8 +83,8 @@ MainController = Ember.Controller.extend
             name: place.name
             status: "created"
             response: null
-            # phone: formatted_phone_number
-            phone: "(707) 849-6085"
+            phone: formatted_phone_number
+            # phone: "(707) 849-6085"
             address: place.formatted_address
           }).save().then (newPlace) =>
             @get('search').get('places').then (places) =>
