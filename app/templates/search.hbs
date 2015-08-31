@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<h1>{{model.boozType}}</h1>
+<h1>{{search.boozType}}</h1>
 {{#if searchInProgress}}
   <div class="progress">
     <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: {{percentComplete}}%;">
@@ -12,23 +12,23 @@
   </div>
 {{/if}}
 
-{{#each completedSearches as |search|}}
-  <div class="row">
+{{#each search.sortedPlaces key="id" as |place|}}
+  <div class="row place-container">
     <div class="col-md-12 col-sm-12 col-lg-12">
-      <div class="panel panel-{{search.statusClass}}">
+      <div class="panel panel-info panel-{{place.statusClass}}">
         <div class="panel-body">
           <div class="row">
             <div class="col-sm-9 col-md-9 col-lg-9">
-              <p>{{search.name}}</p>
+              <p>{{place.name}}</p>
               <small>
-                {{search.address}}
+                {{place.address}}
                 <br>
-                {{search.phone}}
+                {{place.phone}}
               </small>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3 place-icon-container">
-              {{#if search.isComplete}}
-                {{fa-icon search.statusIconClass}}
+              {{#if place.isComplete}}
+                {{fa-icon place.statusIconClass}}
               {{else}}
                 <div class="loader-inner ball-clip-rotate"><div></div></div>
               {{/if}}

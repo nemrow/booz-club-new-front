@@ -4,7 +4,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12 main-explanation-container">
     <h1>Find Your Favorite Drink Anywhere</h1>
     <h2>
       Search current inventories of thousands of local retailers
@@ -13,16 +13,17 @@
     </h2>
   </div>
 </div>
+<br>
 
 {{#if locationFound}}
   {{#if searching}}
     {{loading-spinner text="searching possible locations..."}}
   {{else}}
     <div class="row">
-      <div class="col-md-12 form-group">
+      <div class="col-md-12 form-group search-box">
         <label>What are you looking for?</label>
         <div class="input-group">
-          {{input value=boozType class="form-control"}}
+          {{input value=boozType class="form-control" placeholder="ex: pliney the elder"}}
           <span class="input-group-btn">
             <button {{action 'beginSearch'}} class="btn btn-default" type="button">Search!</button>
           </span>

@@ -57,6 +57,7 @@ MainController = Ember.Controller.extend
       data: {searchId: @get('search').id}
       method: "post"
       success: (result) =>
+        @set 'searching', false
         @transitionTo 'search', @get('search').id
       fail: (result) ->
         alert "shit, something went wrong"

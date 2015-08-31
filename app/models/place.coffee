@@ -29,7 +29,6 @@ Place = DS.Model.extend {
         else
           "times"
   ).property('status', 'response')
-
 }
 
 `export default Place`

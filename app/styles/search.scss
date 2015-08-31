@@ -1,10 +1,14 @@
+.panel-info {
+  background-color: #89C4F4;
+}
+
 .panel-success {
   background-color: #87D37C;
   border: none;
   outline: none;
 }
 
-.panel-warning {
+.panel-danger {
   background-color: #D91E18;
 }
 
@@ -12,6 +16,25 @@
   background-color: #F89406;
 }
 
-.place-icon-container i {
-  font-size: 40px;
+
+.place-icon-container {
+  margin-top: 19px;
+
+  .loader-inner {
+    margin-top: 9px;
+  }
+
+  i {
+    font-size: 40px;
+  }
+}
+
+.place-container {
+  p {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+  }
+  small {
+    font-family: 'Lato', sans-serif;
+  }
 }

@@ -5,6 +5,10 @@ module.exports = function(environment) {
       apiKey: 'AIzaSyAz0l6x1gaD-gTHvNpEe7e31QWnl-Ob8-U',
       libraries: ['places']
     },
+    googleFonts: [
+      'Lato:700,300italic',
+      'Oswald:700,300'
+    ],
     modulePrefix: 'booz-club',
     environment: environment,
     contentSecurityPolicy: {
