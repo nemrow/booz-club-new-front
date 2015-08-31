@@ -21,6 +21,8 @@ Search = DS.Model.extend {
         return 1
       if a.get('response') == b.get('response')
         return 0
+      else
+        1
 }
 
 `export default Search`
