@@ -62,26 +62,39 @@ MainController = Ember.Controller.extend
       fail: (result) ->
         alert "shit, something went wrong"
 
+  formatNumber: (number) ->
+    return false if number == undefined
+    match = number.match(/\(\d{3}\) \d{3}-\d{4}/)
+    if match
+      match[0]
+    else
+      false
+
+
   createAllPlaces: (places, currentIndex) ->
     nextIndex = currentIndex + 5
     currentBatch = places.slice(currentIndex, nextIndex)
     for place in currentBatch
       @getPlacesService(this).getDetails {placeId: place.place_id}, (place, status) =>
-        @store.createRecord("place", {
-          search: @get('search')
-          name: place.name
-          status: "created"
-          response: null
-          phone: place.formatted_phone_number
-          # phone: "(707) 849-6085"
-          address: place.formatted_address
-        }).save().then (newPlace) =>
-          @get('search').get('places').then (places) =>
-            places.pushObject newPlace
-            @get('search').save()
-            @set 'placesCount', @get('placesCount') - 1
-            console.log @get("placesCount")
-            @placesSearchComplete() if @get('placesCount') == 0
+        formatted_phone_number = @formatNumber place.formatted_phone_number
+        if formatted_phone_number
+          @store.createRecord("place", {
+            search: @get('search')
+            name: place.name
+            status: "created"
+            response: null
+            # phone: formatted_phone_number
+            phone: "(707) 849-6085"
+            address: place.formatted_address
+          }).save().then (newPlace) =>
+            @get('search').get('places').then (places) =>
+              places.pushObject newPlace
+              @get('search').save()
+              @set 'placesCount', @get('placesCount') - 1
+              @placesSearchComplete() if @get('placesCount') == 0
+        else
+          @set 'placesCount', @get('placesCount') - 1
+          @placesSearchComplete() if @get('placesCount') == 0
     setTimeout =>
       @createAllPlaces(places, nextIndex) if places[nextIndex] != undefined
     , 2000

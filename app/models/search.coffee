@@ -6,15 +6,21 @@ Search = DS.Model.extend {
   longitude: DS.attr 'string'
   places: DS.hasMany "place", async: true
   sortedPlaces: Ember.computed.sort 'places.@each.response', (a, b) =>
-    if a.get('status') == "complete"
-      if a.get('response') == "in stock"
+      if a.get('response') == "in stock" && b.get('response') == "not in stock"
         return -1
-      if a.get('response') == "not in stock" && b.get('response') == ""
+      if a.get('response') == "in stock" && b.get('response') == undefined
+        console.log a.get('id')
         return -1
-      if a.get('response') == ""
+      if a.get('response') == "not in stock" && b.get('response') == undefined
         return 1
-    else
-      return 1
+      if a.get('response') == "not in stock" && b.get('response') == "in stock"
+        return 1
+      if a.get('response') == undefined && b.get('response') == "in stock"
+        return 1
+      if a.get('response') == undefined && b.get('response') == "not in stock"
+        return 1
+      if a.get('response') == b.get('response')
+        return 0
 }
 
 `export default Search`
