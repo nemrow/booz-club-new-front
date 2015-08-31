@@ -89,9 +89,9 @@ MainController = Ember.Controller.extend
   checkDensity: (results) ->
     console.log @get('placesCount')
     if @get('currentRadius') > 4828 && @get('placesCount') < 5
-      # Not enough places
-    # else if @get('placesCount') < 12
-    else if @get('placesCount') < 2
+      alert("We cannot find enough liquor stores in your area. Move somewhere else.")
+    else if @get('placesCount') < 12
+    # else if @get('placesCount') < 2
       # found X places, looking for more
       setTimeout =>
         @set 'currentRadius', @get('currentRadius') + 200
