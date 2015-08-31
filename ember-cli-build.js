@@ -7,6 +7,7 @@ module.exports = function(defaults) {
   });
 
   app.import('vendor/jquery.backstretch.min.js');
+  app.import('vendor/loaders.css.js');
 
   // Use `app.import` to add additional libraries to the generated
   // output files.

@@ -1,12 +1,39 @@
-{{input value=boozType}}
-<button {{action 'beginSearch'}}>Search</button>
+<div class="row">
+  <div class="col-md-12 logo">
+    <img src="https://s3-us-west-2.amazonaws.com/booz-club/assets/logo.jpg">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h1>Find Your Favorite Drink Anywhere</h1>
+    <h2>
+      Search current inventories of thousands of local retailers
+      <br>
+      <span>(with up to the minute accuracy)</span>
+    </h2>
+  </div>
+</div>
 
 {{#if locationFound}}
-  <p>location found</p>
+  {{#if searching}}
+    {{loading-spinner text="searching possible locations..."}}
+  {{else}}
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <label>What are you looking for?</label>
+        <div class="input-group">
+          {{input value=boozType class="form-control"}}
+          <span class="input-group-btn">
+            <button {{action 'beginSearch'}} class="btn btn-default" type="button">Search!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  {{/if}}
 {{else}}
-  <p>location not found</p>
+  {{loading-spinner text="searching for location"}}
 {{/if}}
 
 {{#if locationFound}}
-  {{google-map lat=latitude lng=longitude}}
+  {{google-map class="map-container"}}
 {{/if}}

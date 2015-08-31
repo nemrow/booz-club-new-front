@@ -10,6 +10,7 @@ MainController = Ember.Controller.extend
   map: null
   placesService: null
   search: null
+  searching: false
   handlerApi: "https://booz-club-new-back-production.herokuapp.com/search"
 
   getPlacesService: (context) ->
@@ -113,6 +114,7 @@ MainController = Ember.Controller.extend
 
   actions:
     beginSearch: ->
+      @set 'searching', true
       newSearch = @store.createRecord 'search', {
         boozType: @get('boozType')
         latitude: @get('latitude')
