@@ -3,6 +3,31 @@
 SearchController = Ember.ArrayController.extend
   percentComplete: 0
 
+  placeCount: (->
+    @get('model.length')
+  ).property('model.length')
+
+  inStockCount: (->
+    count = 0
+    @get('model').forEach (place) ->
+      count += 1 if place.get('response') == "in stock"
+    count
+  ).property('model.@each.response')
+
+  outOfStockCount: (->
+    count = 0
+    @get('model').forEach (place) ->
+      count += 1 if place.get('response') == "not in stock"
+    count
+  ).property('model.@each.response')
+
+  noResponseCount: (->
+    count = 0
+    @get('model').forEach (place) ->
+      count += 1 if place.get('response') == undefined
+    count
+  ).property('model.@each.response')
+
   searchInProgress: (->
     @get('percentComplete') != 100
   ).property('percentComplete')

@@ -6,7 +6,24 @@
   </div>
 </div>
 
+
 <h1>{{search.boozType}}</h1>
+
+<div class="row">
+    <div class="col-xs-6 col-sm-3 result-key result-key-success">
+      <span class="label label-default">{{inStockCount}} in stock</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 result-key result-key-danger">
+      <span class="label label-default">{{outOfStockCount}} out of stock</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 result-key result-key-default">
+      <span class="label label-default">{{placeCount}} stores called</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 result-key result-key-primary">
+      <span class="label label-default">{{noResponseCount}} no response</span>
+    </div>
+</div>
+
 {{#if searchInProgress}}
   <div class="progress">
     <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: {{percentComplete}}%;">

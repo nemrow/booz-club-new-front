@@ -38,3 +38,31 @@
     font-family: 'Lato', sans-serif;
   }
 }
+
+.result-key {
+  margin-bottom: 10px;
+}
+
+.result-key-default {
+  span {
+    background-color: #89C4F4;
+  }
+}
+
+.result-key-success {
+  span {
+    background-color: #87D37C;
+  }
+}
+
+.result-key-danger {
+  span {
+    background-color: #D91E18;
+  }
+}
+
+.result-key-primary {
+  span {
+    background-color: #F89406;
+  }
+}
