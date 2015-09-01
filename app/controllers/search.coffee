@@ -24,7 +24,7 @@ SearchController = Ember.ArrayController.extend
   noResponseCount: (->
     count = 0
     @get('model').forEach (place) ->
-      count += 1 if place.get('response') == undefined
+      count += 1 if !place.get('response')
     count
   ).property('model.@each.response')
 
