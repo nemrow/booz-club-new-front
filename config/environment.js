@@ -3,7 +3,7 @@ module.exports = function(environment) {
   var ENV = {
     googleMap: {
       apiKey: 'AIzaSyAz0l6x1gaD-gTHvNpEe7e31QWnl-Ob8-U',
-      libraries: ['places']
+      libraries: ['places', 'geocode']
     },
     googleFonts: [
       'Lato:700,300italic',

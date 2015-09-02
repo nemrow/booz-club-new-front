@@ -18,20 +18,24 @@
 <br>
 
 {{#if locationFound}}
-  {{#if searching}}
-    {{loading-spinner text="searching possible locations..."}}
-  {{else}}
-    <div class="row">
-      <div class="col-md-12 form-group search-box">
-        <label>What are you looking for?</label>
-        <div class="input-group">
-          {{input value=boozType class="form-control" placeholder="ex: Pliny The Elder"}}
-          <span class="input-group-btn">
-            <button {{action 'beginSearch'}} class="btn btn-default" type="button">Search!</button>
-          </span>
+  {{#if isInUnitedStates}}
+    {{#if searching}}
+      {{loading-spinner text="searching possible locations..."}}
+    {{else}}
+      <div class="row">
+        <div class="col-md-12 form-group search-box">
+          <label>What are you looking for?</label>
+          <div class="input-group">
+            {{input value=boozType class="form-control" placeholder="ex: Pliny The Elder"}}
+            <span class="input-group-btn">
+              <button {{action 'beginSearch'}} class="btn btn-default" type="button">Search!</button>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    {{/if}}
+  {{else}}
+    <p>Sorry, this app can only be used in the United States</p>
   {{/if}}
 {{else}}
   {{loading-spinner text="searching for location"}}

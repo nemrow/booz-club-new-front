@@ -11,6 +11,7 @@ MainController = Ember.Controller.extend
   placesService: null
   search: null
   searching: false
+  userCountry: null
   handlerApi: "https://booz-club-new-back-production.herokuapp.com/search"
 
   getPlacesService: (context) ->
@@ -28,9 +29,22 @@ MainController = Ember.Controller.extend
       context.set 'map', new google.maps.Map($('.map')[0], {center: context.getLatLng(context), zoom: 15})
     context.get('map')
 
+  isInUnitedStates: (->
+    if @get('userCountry')
+      @get('userCountry') == "United States"
+  ).property('locationFound', 'userCountry')
+
   locationFound: (->
-    @get('latitude') && @get('longitude')
-  ).property('latitude', 'longitude')
+    @get('latitude') && @get('longitude') && @get('userCountry') != null
+  ).property('latitude', 'longitude', 'userCountry')
+
+  setLocation: (geoposition) ->
+    @set 'latitude', geoposition.coords.latitude
+    @set 'longitude', geoposition.coords.longitude
+    geocoder = new google.maps.Geocoder()
+    latlng = {lat: @get('latitude'), lng: @get('longitude')}
+    geocoder.geocode {location: latlng}, (results, status) =>
+      @set 'userCountry', results[1]["address_components"][4]["long_name"]
 
   init: ->
     this._super()
@@ -40,16 +54,14 @@ MainController = Ember.Controller.extend
 
     # You can use event handlers
     @get('geolocation').on 'change', (geoposition) =>
-      @set 'latitude', geoposition.coords.latitude
-      @set 'longitude', geoposition.coords.longitude
+      @setLocation geoposition
 
     @get('geolocation').on 'error', ->
       console.log("SOME ERR");
 
     # Or you can simply do like that
     this.get('geolocation').getGeoposition().then (geoposition) =>
-      @set 'latitude', geoposition.coords.latitude
-      @set 'longitude', geoposition.coords.longitude
+      @setLocation geoposition
 
   placesSearchComplete: ->
     $.ajax
@@ -100,7 +112,6 @@ MainController = Ember.Controller.extend
     , 2000
 
   checkDensity: (results) ->
-    console.log @get('placesCount')
     if @get('currentRadius') > 4828 && @get('placesCount') < 5
       alert("We cannot find enough liquor stores in your area. Move somewhere else.")
     else if @get('placesCount') < 12
