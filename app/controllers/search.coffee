@@ -24,9 +24,9 @@ SearchController = Ember.ArrayController.extend
   noResponseCount: (->
     count = 0
     @get('model').forEach (place) ->
-      count += 1 if !place.get('response')
+      count += 1 if !place.get('response') && place.get('isComplete')
     count
-  ).property('model.@each.response')
+  ).property('model.@each.response', 'model.@each.status')
 
   searchInProgress: (->
     @get('percentComplete') != 100
