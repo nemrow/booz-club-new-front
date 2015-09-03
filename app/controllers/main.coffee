@@ -44,7 +44,9 @@ MainController = Ember.Controller.extend
     geocoder = new google.maps.Geocoder()
     latlng = {lat: @get('latitude'), lng: @get('longitude')}
     geocoder.geocode {location: latlng}, (results, status) =>
-      @set 'userCountry', results[1]["address_components"][4]["long_name"]
+      for component in results[1]["address_components"]
+        if component.types.contains("country")
+          @set 'userCountry', component.long_name
 
   init: ->
     this._super()
