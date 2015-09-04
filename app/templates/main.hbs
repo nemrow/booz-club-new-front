@@ -17,6 +17,13 @@
 </div>
 <br>
 
+{{#if cannotFindLocation}}
+  <p>
+    Cannot find your location.<br>
+    Please allow access to your location.
+  </p>
+{{/if}}
+
 {{#if locationFound}}
   {{#if isInUnitedStates}}
     {{#if searching}}

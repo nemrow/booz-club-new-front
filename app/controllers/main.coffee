@@ -12,6 +12,7 @@ MainController = Ember.Controller.extend
   search: null
   searching: false
   userCountry: null
+  cannotFindLocation: false
   handlerApi: "https://booz-club-new-back-production.herokuapp.com/search"
 
   getPlacesService: (context) ->
@@ -58,8 +59,8 @@ MainController = Ember.Controller.extend
     @get('geolocation').on 'change', (geoposition) =>
       @setLocation geoposition
 
-    @get('geolocation').on 'error', ->
-      console.log("SOME ERR");
+    @get('geolocation').on 'error', (error) =>
+      @set 'cannotFindLocation', true
 
     # Or you can simply do like that
     this.get('geolocation').getGeoposition().then (geoposition) =>
